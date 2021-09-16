@@ -1,5 +1,6 @@
 import { PresenceData, TextChannel } from 'discord.js';
 import {Command, Event, Bot, Logger} from '../utils/class/index';
+import { rss } from '../utils/functions/rss';
 
 export default new Event('ready', async (client: Bot) => {
 	const guilds = [
@@ -75,4 +76,6 @@ export default new Event('ready', async (client: Bot) => {
 		})
     },
     60000)
+
+	await rss(client)
 });
