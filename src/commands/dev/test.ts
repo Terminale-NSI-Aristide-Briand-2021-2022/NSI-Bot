@@ -11,7 +11,16 @@ export default new Command(
 	},
 	async (client: Bot, interaction: CommandInteraction) => {
 		await interaction.deferReply()
-		
+
+		let res = await fetch(process.env.MOODLE_LINK + "/course/view.php?id=16", {method: "GET", headers: {
+			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+			Cookie: "MoodleSession=4mfh4jauhi15is6rrrem0ga8d0",
+			Connection: "keep-alive"
+		}})
+		let resTrans = await res.text()
+		console.log(resTrans)
+
+		/*
 		let res = await fetch(process.env.MOODLE_LINK + "/mod/forum/view.php?id=93")
 		let last = (await res.text()).split("<tr class=\"discussion r")[1]
 		console.log(last)
@@ -21,9 +30,7 @@ export default new Command(
         let hourTab = dateTab[4].split(":")
         let mounth = dateTab[2].replace("janv.", "0").replace("fébr.", "1").replace("mars", "2").replace("avril","3").replace("mai","4").replace("juin","5").replace("juil.","6").replace("aout","7").replace("sept.","8").replace("oct.","9").replace("nov.","10").replace('déc',"11")
         const dateRss = (new Date(Number(dateTab[3].replace(",", "")), Number(mounth), Number(dateTab[1]), Number(hourTab[0]), Number(hourTab[1].replace("</a", "")))).getTime() + 999
-		console.log(Number(dateTab[3].replace(",", "")), Number(mounth), Number(dateTab[1]), Number(hourTab[0]), Number(hourTab[1].replace("</a", "")))
         console.log(dateRss)
-		console.log(hourTab[1])
 		/*
 		const main = async() => {
 			const session = await login((process.env.PRONOTE_LINK as string), (process.env.PRONOTE_USER as string), (process.env.PRONOTE_MDP as string), "monbureaunumerique-educonnect")
