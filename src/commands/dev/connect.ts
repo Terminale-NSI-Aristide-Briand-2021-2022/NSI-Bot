@@ -1,4 +1,4 @@
-import {CommandInteraction} from 'discord.js';
+import {CommandInteraction, MessageEmbed} from 'discord.js';
 import { errors, login } from 'pronote-api';
 import {Command, Bot} from '../../utils/class';
 
@@ -52,8 +52,20 @@ export default new Command(
 			if (err.code === errors.WRONG_CREDENTIALS.code) {
 				await interaction.editReply({content: `Wrong credentials`})
 			} else {
-                await interaction.editReply({content: `Error (see console)`})
-				console.error(err);
+                await interaction.editReply({content: `Error`})
+                const embed = new MessageEmbed({
+                    color: 'RED',
+                    author: {
+                        name: interaction.user.tag,
+                        iconURL: interaction.user.displayAvatarURL(),
+                    },
+                    footer: {
+                        text: client?.user?.username + ' • Page (' + Math.floor(0 / 1800) + '/' + (Math.ceil(err.length / 1800) - 1) + ') ',
+                        iconURL: client?.user?.displayAvatarURL(),
+                    },
+                    description: '```js\n' + err + '```',
+                });
+                await interaction.followUp({embeds: [embed], ephemeral: true})
 			}
 		});
         if (!error) await interaction.editReply({content: `It work !!!`})
