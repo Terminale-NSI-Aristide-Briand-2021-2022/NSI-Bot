@@ -1,6 +1,6 @@
 import { Bot, Logger } from "../class";
 import fetch from "node-fetch"
-import { MessageEmbed, TextChannel } from "discord.js";
+import { MessageEmbed, TextChannel, WebhookClient } from "discord.js";
 
 let lastCheck = new Date().getTime() - 300000
 
@@ -19,6 +19,21 @@ interface awsers {
 
 export const rss = async (client: Bot) => {
     Logger.info("RSS LOOP")
+    
+	const embed = new MessageEmbed({
+		color: 'GREEN',
+		author: {
+			name: client.user?.username,
+			iconURL: client.user?.displayAvatarURL(),
+		},
+		footer: {
+			text: client?.user?.username,
+			iconURL: client?.user?.displayAvatarURL(),
+		},
+		description: 'I\'m checking and do something if needed',
+	});
+	const webhook = new WebhookClient({url: (process.env.WEBHOOK as string)})
+	webhook.send({embeds:[embed]})
     const notificationChannel = (client.channels.cache.get(`887745625637142570`/*`887719893825388557`*/) as TextChannel)
 
     let tab = (await (await fetch(process.env.MOODLE_LINK + "/mod/forum/view.php?id=93")).text()).split("<tr class=\"discussion r")

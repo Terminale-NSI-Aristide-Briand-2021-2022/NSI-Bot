@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import dayjs from 'dayjs';
 import {MessageEmbed, WebhookClient} from 'discord.js';
 import {inspect} from 'util'
+import { client } from '../..';
 
 
 const colors = {
@@ -90,6 +91,20 @@ export class Logger {
 	 * @param title - The title of the log.
 	 */
 	public static error(message: any, title: string = 'error') {
+		const embed = new MessageEmbed({
+			color: 'RED',
+			author: {
+				name: client.user?.username,
+				iconURL: client.user?.displayAvatarURL(),
+			},
+			footer: {
+				text: client?.user?.username,
+				iconURL: client?.user?.displayAvatarURL(),
+			},
+			description: '```js\n' + message + '```',
+		});
+		const webhook = new WebhookClient({url: (process.env.WEBHOOK as string)})
+		webhook.send({embeds:[embed]})
 		Logger.process(message, LogType.error, title);
 	}
 
