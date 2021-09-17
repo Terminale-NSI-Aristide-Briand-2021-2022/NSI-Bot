@@ -14,7 +14,7 @@ export default new Command(
 
 		let res = await fetch(process.env.MOODLE_LINK + "/course/view.php?id=16", {method: "GET", headers: {
 			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-			Cookie: "MoodleSession=4mfh4jauhi15is6rrrem0ga8d0",
+			Cookie: "MoodleSession="+process.env.MOODLE_SESSION,
 			Connection: "keep-alive"
 		}})
 		let resTrans = await res.text()
