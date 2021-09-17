@@ -104,7 +104,9 @@ export const rss = async (client: Bot) => {
     }
 
     lastCheck = new Date().getTime()
-    setTimeout(rss, 300000)
+    setTimeout(() => {
+        rss(client)
+    }, 300000)
 }
 
 async function replies(grosString:string, c: TextChannel, nbGS: number, index: number) {
