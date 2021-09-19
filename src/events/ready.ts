@@ -1,10 +1,10 @@
-import { PresenceData, TextChannel } from 'discord.js';
+import {PresenceData, TextChannel} from 'discord.js';
 import {Command, Event, Bot, Logger} from '../utils/class/index';
-import { rss } from '../utils/functions/rss';
+import {rss} from '../utils/functions/rss';
 
 export default new Event('ready', async (client: Bot) => {
 	const guilds = [
-		client.guilds.cache.get(`887719893825388554`) //This is my testing guild
+		client.guilds.cache.get(`887719893825388554`), //This is my testing guild
 	];
 	Logger.log(`${client.user?.username} launched in ${Date.now() - client.launchedAt}ms !`);
 
@@ -33,7 +33,8 @@ export default new Event('ready', async (client: Bot) => {
 								permission: true,
 							},
 						],
-					}).catch(_ => _);
+					})
+					.catch(_ => _);
 			}
 			for (const cmd of client.commands.filter(c => c instanceof Command && (c.permission?.user?.mod ?? false)).map(m => (m as Command).data.name)) {
 				guild?.commands.cache
@@ -41,41 +42,41 @@ export default new Event('ready', async (client: Bot) => {
 					?.permissions.add({
 						permissions: [
 							{
-								type: "USER",
-								id: "563749920683720709", //Fantomitechno
-								permission: true
-							}
+								type: 'USER',
+								id: '563749920683720709', //Fantomitechno
+								permission: true,
+							},
 						],
-					}).catch(_ => _);
+					})
+					.catch(_ => _);
 			}
 		}
 	}
 	Logger.info('Cache', 'SETUP');
-	for (const guild of client.guilds.cache.map(m =>m)) {
-        await guild?.members.fetch()
+	for (const guild of client.guilds.cache.map(m => m)) {
+		await guild?.members.fetch();
 	}
 	Logger.info('Done', 'SETUP');
-    client.user?.setPresence({
-		status: "online",
+	client.user?.setPresence({
+		status: 'online',
 		activities: [
 			{
-				name: "les devoirs à faire",
-				type: 'WATCHING'
-			}
-		]
-	})
-    setInterval(() => {
-        client.user?.setPresence({
-			status: "online",
+				name: 'les devoirs à faire',
+				type: 'WATCHING',
+			},
+		],
+	});
+	setInterval(() => {
+		client.user?.setPresence({
+			status: 'online',
 			activities: [
 				{
-					name: "les devoirs à faire",
-					type: 'WATCHING'
-				}
-			]
-		})
-    },
-    60000)
+					name: 'les devoirs à faire',
+					type: 'WATCHING',
+				},
+			],
+		});
+	}, 60000);
 
-	await rss(client)
+	await rss(client);
 });

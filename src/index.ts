@@ -1,7 +1,7 @@
 import {Bot} from './utils/class';
 import {Logger} from './utils/class';
 
-require("dotenv").config()
+require('dotenv').config();
 
 export const client = new Bot(
 	{
@@ -9,11 +9,7 @@ export const client = new Bot(
 		inDev: true,
 	},
 	{
-		intents: [
-			'GUILDS',
-			'GUILD_MESSAGES',
-			'GUILD_MEMBERS'
-		]
+		intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS'],
 	}
 );
 
