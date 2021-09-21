@@ -130,7 +130,7 @@ export const rss = async (client: Bot) => {
 
 	let tabNeeded = Tabs[Tabs.length - 1].split(`">`)[0];
 	let tabName = Tabs[Tabs.length - 1].split(`<span class="instancename">`)[1].split('<span')[0];
-	if (tabNeeded && lastTab != tabName) {
+	if (tabNeeded && lastTab != tabName && lastTab) {
 		lastTab = tabName
 		let embed = new MessageEmbed({
 			title: 'Un nouveau tableau est disponible !',
