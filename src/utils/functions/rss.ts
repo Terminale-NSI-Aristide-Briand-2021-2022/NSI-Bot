@@ -6,7 +6,7 @@ let lastCheck = new Date().getTime() - 300000;
 
 let awsers = [-1, -1, -1];
 
-let checked = new Date().getDate() - 1;
+let lastTab: string;
 
 interface awsers {
 	id: number;
@@ -128,31 +128,17 @@ export const rss = async (client: Bot) => {
 		.split('</ul>')[0]
 		.split(`<li class="activity resource modtype_resource " id="module-`);
 
-	let tabNeeded = Tabs.find(i =>
-		i.includes(
-			`di ${new Date().getDate()}/${
-				(new Date().getMonth() + 1).toString().length === 2 ? (new Date().getMonth() + 1).toString() : '0' + (new Date().getMonth() + 1).toString()
-			}`
-		)
-	)?.split(`">`)[0];
-	if (tabNeeded && checked != new Date().getDate()) {
-		checked = new Date().getDate();
-		let tabName = Tabs.find(i =>
-			i.includes(
-				`di ${new Date().getDate()}/${
-					(new Date().getMonth() + 1).toString().length === 2 ? (new Date().getMonth() + 1).toString() : '0' + (new Date().getMonth() + 1).toString()
-				}`
-			)
-		)
-			?.split(`<span class="instancename">`)[1]
-			.split('<span')[0];
+	let tabNeeded = Tabs[Tabs.length - 1].split(`">`)[0];
+	let tabName = Tabs[Tabs.length - 1].split(`<span class="instancename">`)[1].split('<span')[0];
+	if (tabNeeded && lastTab != tabName) {
+		lastTab = tabName
 		let embed = new MessageEmbed({
 			title: 'Un nouveau tableau est disponible !',
 			description: `${tabName} disponible au lien suivant : [Lien](${process.env.MOODLE_LINK + '/mod/resource/view.php?id=' + tabNeeded})`,
 			color: 'LUMINOUS_VIVID_PINK',
 		});
 		notificationChannel.send({embeds: [embed], content: 'Nouveau tableau'});
-	}
+	} else lastTab = tabName
 
 	lastCheck = new Date().getTime();
 	setTimeout(() => {
