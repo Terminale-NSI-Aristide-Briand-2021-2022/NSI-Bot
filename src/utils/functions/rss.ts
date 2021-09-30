@@ -26,23 +26,27 @@ export const rss = async (client: Bot) => {
 
 	let last = tab[1];
 
+	const sujet = last.split(`<td class="topic starter">`)[1].split('</td>')[0];
+	const url = sujet.split(`<a href="`)[1].split(`">`)[0];
+	const page = await (await fetch(url)).text()
+	const dateStr = page.split(`<div class="topic firstpost starter">`)[1].split(", ").slice(1, 3).join(", ")
+
 	// We get the date and we handle it to change it as a timestamp
-	let dateStr = last.split('>')[27];
 	let dateTab = dateStr.split(' ');
 	let hourTab = dateTab[4].split(':');
 	let mounth = dateTab[2]
-		.replace('janv.', '0')
-		.replace('fébr.', '1')
+		.replace('janvier', '0')
+		.replace('févier', '1')
 		.replace('mars', '2')
 		.replace('avril', '3')
 		.replace('mai', '4')
 		.replace('juin', '5')
-		.replace('juil.', '6')
+		.replace('juillet', '6')
 		.replace('aout', '7')
-		.replace('sept.', '8')
-		.replace('oct.', '9')
-		.replace('nov.', '10')
-		.replace('déc', '11');
+		.replace('septembre', '8')
+		.replace('octobre', '9')
+		.replace('novembre', '10')
+		.replace('décembre', '11');
 	const dateRss =
 		new Date(
 			Number(dateTab[3].replace(',', '')),
@@ -71,7 +75,8 @@ export const rss = async (client: Bot) => {
 				.split(`<div class="attachedimages">`)[0]
 				.replace(/<p>/g, '')
 				.replace(/<\/p>/g, '\n')
-				.replace(/<br \/>/g, '\n') + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
+				.replace(/<br \/>/g, '\n')
+				.replace(/&gt;/, ">") + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
 
 		const embed = new MessageEmbed({
 			author: {
@@ -163,7 +168,8 @@ async function replies(grosString: string, c: TextChannel, nbGS: number, index: 
 				.replace(/<span>/g, '')
 				.replace(/<\/span>/g, '')
 				.replace(/<\/p>/g, '\n')
-				.replace(/<br \/>/g, '\n'),
+				.replace(/<br \/>/g, '\n')
+				.replace(/&gt;/, ">"),
 			author: {
 				pp: awsersList[i].split(`<div class="left picture">`)[1].split('</div>')[0].split(`<img src="`)[1].split(`"`)[0],
 				name: awsersList[i].split(`<div class="author"`)[1].split('</div>')[0].split('<a href="')[1].split('</a>')[0].split(`">`)[1],
