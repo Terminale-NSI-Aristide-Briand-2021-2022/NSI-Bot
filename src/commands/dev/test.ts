@@ -1,7 +1,9 @@
-import {CommandInteraction} from 'discord.js';
-import { errors, login } from 'pronote-api';
+import {CommandInteraction, MessageEmbed} from 'discord.js';
 import {Command, Bot} from '../../utils/class';
-import fetch from "node-fetch"
+import {JSDOM} from 'jsdom'
+import https from "https"
+import fetch from 'node-fetch';
+import { URLSearchParams } from 'url';
 
 export default new Command(
 	{
