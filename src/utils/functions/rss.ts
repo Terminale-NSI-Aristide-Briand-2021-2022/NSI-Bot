@@ -2,6 +2,7 @@ import {Bot, Logger} from '../class';
 import fetch from 'node-fetch';
 import {MessageEmbed, TextChannel, WebhookClient} from 'discord.js';
 
+
 let lastCheck = new Date().getTime() - 300000;
 
 let awsers = [-1, -1, -1];
@@ -53,14 +54,16 @@ export const rss = async (client: Bot) => {
 			Number(mounth),
 			Number(dateTab[1]),
 			Number(hourTab[0]) - 2,
-			Number(hourTab[1].replace('</a', ''))
+			Number(hourTab[1].replace('</div></div></div><div', ''))
 		).getTime() + 9999;
-
+	
+	console.log(dateRss)
 	let awserLast = Number(last.split(`<td class="replies">`)[1].split('</a>')[0].split('>')[1]);
 
 	if (awsers[0] === -1) awsers[0] = awserLast;
 
 	if (dateRss > lastCheck) {
+		awsers = [awserLast, awsers[0], awsers[1]]
 		// Here we see that the last forum topic is new so we handle it
 		const sujet = last.split(`<td class="topic starter">`)[1].split('</td>')[0];
 		const url = sujet.split(`<a href="`)[1].split(`">`)[0];
