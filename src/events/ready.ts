@@ -1,4 +1,3 @@
-import {PresenceData, TextChannel} from 'discord.js';
 import {Command, Event, Bot, Logger} from '../utils/class/index';
 import {rss} from '../utils/functions/rss';
 
@@ -26,13 +25,13 @@ export default new Event('ready', async (client: Bot) => {
 				guild?.commands.cache
 					.find(c => c.name === cmd)
 					?.permissions.add({
-						permissions: [
-							{
-								id: '563749920683720709', //Fantomitechno
-								type: 'USER',
-								permission: true,
-							},
-						],
+						permissions: client.developpers.map(d => {
+							return {
+								id: d,
+								type: "USER",
+								permission: true
+							}
+						})
 					})
 					.catch(_ => _);
 			}
@@ -40,13 +39,13 @@ export default new Event('ready', async (client: Bot) => {
 				guild?.commands.cache
 					.find(c => c.name === cmd)
 					?.permissions.add({
-						permissions: [
-							{
-								type: 'USER',
-								id: '563749920683720709', //Fantomitechno
-								permission: true,
-							},
-						],
+						permissions: client.developpers.map(d => {
+							return {
+								id: d,
+								type: "USER",
+								permission: true
+							}
+						})
 					})
 					.catch(_ => _);
 			}
