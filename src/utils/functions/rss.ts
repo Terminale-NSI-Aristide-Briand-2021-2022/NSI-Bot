@@ -2,7 +2,6 @@ import {Bot, Logger} from '../class';
 import fetch from 'node-fetch';
 import {MessageEmbed, TextChannel, WebhookClient} from 'discord.js';
 
-
 let lastCheck = new Date().getTime() - 300000;
 
 let awsers = [-1, -1, -1];
@@ -29,8 +28,8 @@ export const rss = async (client: Bot) => {
 
 	const sujet = last.split(`<td class="topic starter">`)[1].split('</td>')[0];
 	const url = sujet.split(`<a href="`)[1].split(`">`)[0];
-	const page = await (await fetch(url)).text()
-	const dateStr = page.split(`<div class="topic firstpost starter">`)[1].split(", ").slice(1, 3).join(", ")
+	const page = await (await fetch(url)).text();
+	const dateStr = page.split(`<div class="topic firstpost starter">`)[1].split(', ').slice(1, 3).join(', ');
 
 	// We get the date and we handle it to change it as a timestamp
 	let dateTab = dateStr.split(' ');
@@ -56,14 +55,14 @@ export const rss = async (client: Bot) => {
 			Number(hourTab[0]) - 2,
 			Number(hourTab[1].replace('</div></div></div><div', ''))
 		).getTime() + 9999;
-	
-	console.log(dateRss)
+
+	console.log(dateRss);
 	let awserLast = Number(last.split(`<td class="replies">`)[1].split('</a>')[0].split('>')[1]);
 
 	if (awsers[0] === -1) awsers[0] = awserLast;
 
 	if (dateRss > lastCheck) {
-		awsers = [awserLast, awsers[0], awsers[1]]
+		awsers = [awserLast, awsers[0], awsers[1]];
 		// Here we see that the last forum topic is new so we handle it
 		const sujet = last.split(`<td class="topic starter">`)[1].split('</td>')[0];
 		const url = sujet.split(`<a href="`)[1].split(`">`)[0];
@@ -79,7 +78,7 @@ export const rss = async (client: Bot) => {
 				.replace(/<p>/g, '')
 				.replace(/<\/p>/g, '\n')
 				.replace(/<br \/>/g, '\n')
-				.replace(/&gt;/, ">") + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
+				.replace(/&gt;/, '>') + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
 
 		const embed = new MessageEmbed({
 			author: {
@@ -139,14 +138,14 @@ export const rss = async (client: Bot) => {
 	let tabNeeded = Tabs[Tabs.length - 1].split(`">`)[0];
 	let tabName = Tabs[Tabs.length - 1].split(`<span class="instancename">`)[1].split('<span')[0];
 	if (tabNeeded && lastTab != tabName && lastTab) {
-		lastTab = tabName
+		lastTab = tabName;
 		let embed = new MessageEmbed({
 			title: 'Un nouveau tableau est disponible !',
 			description: `${tabName} disponible au lien suivant : [Lien](${process.env.MOODLE_LINK + '/mod/resource/view.php?id=' + tabNeeded})`,
 			color: 'LUMINOUS_VIVID_PINK',
 		});
 		notificationChannel.send({embeds: [embed], content: 'Nouveau tableau'});
-	} else lastTab = tabName
+	} else lastTab = tabName;
 
 	lastCheck = new Date().getTime();
 	setTimeout(() => {
@@ -172,7 +171,7 @@ async function replies(grosString: string, c: TextChannel, nbGS: number, index: 
 				.replace(/<\/span>/g, '')
 				.replace(/<\/p>/g, '\n')
 				.replace(/<br \/>/g, '\n')
-				.replace(/&gt;/, ">"),
+				.replace(/&gt;/, '>'),
 			author: {
 				pp: awsersList[i].split(`<div class="left picture">`)[1].split('</div>')[0].split(`<img src="`)[1].split(`"`)[0],
 				name: awsersList[i].split(`<div class="author"`)[1].split('</div>')[0].split('<a href="')[1].split('</a>')[0].split(`">`)[1],
