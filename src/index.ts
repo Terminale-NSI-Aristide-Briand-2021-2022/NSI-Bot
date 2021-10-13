@@ -5,7 +5,7 @@ require('dotenv').config();
 
 export const client = new Bot(
 	{
-		devs: ['563749920683720709'],
+		devs: ['563749920683720709', '534822147789553705'],
 		inDev: true,
 	},
 	{
