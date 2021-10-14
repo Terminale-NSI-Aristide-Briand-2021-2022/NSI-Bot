@@ -1,7 +1,6 @@
 import {CommandInteraction, MessageEmbed} from 'discord.js';
-import {Command, Bot} from '../../utils/class';
+import {Command, Bot} from '../../utils';
 import {JSDOM} from 'jsdom';
-import https from 'https';
 import fetch from 'node-fetch';
 import {URLSearchParams} from 'url';
 
@@ -14,8 +13,10 @@ export default new Command(
 	async (client: Bot, interaction: CommandInteraction) => {
 		//await interaction.reply({content: "loading..."});
 		// get a connection token
-		let result = await (await fetch(process.env.MOODLE_LINK + '/login/index.php')).text();
-		const dom = new JSDOM(result);
+		let result = await fetch(process.env.MOODLE_LINK + '/login/index.php')
+		let y = result.headers.get('set-cookie')?.replace('MoodleSession=', '').split(';')[0] || "";
+		console.log(result.headers)
+		const dom = new JSDOM(await result.text());
 		let t = dom.window.document.getElementById('guestlogin')?.innerHTML.split('<input type="hidden" name="logintoken" value="')[1].split('">')[0] ?? '';
 		console.log(t);
 
@@ -28,6 +29,11 @@ export default new Command(
 			await fetch(process.env.MOODLE_LINK + '/login/index.php', {
 				body: params,
 				method: 'POST',
+				headers: {
+					Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+					Cookie: 'MoodleSession=' + y,
+					Connection: 'keep-alive',
+				},
 			})
 		).headers.get('set-cookie');
 
@@ -104,7 +110,7 @@ export default new Command(
         let mounth = dateTab[2].replace("janv.", "0").replace("fébr.", "1").replace("mars", "2").replace("avril","3").replace("mai","4").replace("juin","5").replace("juil.","6").replace("aout","7").replace("sept.","8").replace("oct.","9").replace("nov.","10").replace('déc',"11")
         const dateRss = (new Date(Number(dateTab[3].replace(",", "")), Number(mounth), Number(dateTab[1]), Number(hourTab[0]), Number(hourTab[1].replace("</a", "")))).getTime() + 999
         console.log(dateRss)
-		*/
+		
 		const main = async () => {
 			const session = await login(
 				process.env.PRONOTE_LINK as string,

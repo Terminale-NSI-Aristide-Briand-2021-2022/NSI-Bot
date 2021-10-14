@@ -1,5 +1,5 @@
 import {Message, MessageActionRow, MessageButton, MessageComponentInteraction, MessageEmbed} from 'discord.js';
-import {Event, Bot} from '../utils/class/index';
+import {Event, Bot} from '../utils';
 import piston from 'node-piston';
 const pistonClient = piston();
 

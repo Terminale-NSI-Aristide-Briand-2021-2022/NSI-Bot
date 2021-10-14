@@ -1,5 +1,5 @@
 import {CommandInteraction, MessageEmbed} from 'discord.js';
-import {Command, Bot} from '../../utils/class';
+import {Command, Bot} from '../../utils';
 import {transpile} from 'typescript';
 import {inspect} from 'util';
 
