@@ -11,32 +11,6 @@ export default new Command(
 	async (client: Bot, interaction: CommandInteraction) => {
 		let last = (await (await fetch(process.env.MOODLE_LINK + '/mod/forum/view.php?id=93')).text()).split('<tr class="discussion r')[1];
 
-		// We get the date and we handle it to change it as a timestamp
-		let dateStr = last.split('>')[27];
-		let dateTab = dateStr.split(' ');
-		let hourTab = dateTab[4].split(':');
-		let mounth = dateTab[2]
-			.replace('janv.', '0')
-			.replace('fébr.', '1')
-			.replace('mars', '2')
-			.replace('avril', '3')
-			.replace('mai', '4')
-			.replace('juin', '5')
-			.replace('juil.', '6')
-			.replace('aout', '7')
-			.replace('sept.', '8')
-			.replace('oct.', '9')
-			.replace('nov.', '10')
-			.replace('déc', '11');
-		const dateRss =
-			new Date(
-				Number(dateTab[3].replace(',', '')),
-				Number(mounth),
-				Number(dateTab[1]),
-				Number(hourTab[0]) - 2,
-				Number(hourTab[1].replace('</a', ''))
-			).getTime() + 9999;
-
 		const sujet = last.split(`<td class="topic starter">`)[1].split('</td>')[0];
 		const url = sujet.split(`<a href="`)[1].split(`">`)[0];
 		const titre = sujet.split('>')[1].split('</')[0];
