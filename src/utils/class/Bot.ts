@@ -1,8 +1,7 @@
-import {ApplicationCommandOptionData, Client, ClientOptions, Collection} from 'discord.js';
-import {readdirSync} from 'fs';
-import {Command, Event} from './';
-import {SubCommand} from './';
-import {BotOptions} from '../types/';
+import { ApplicationCommandOptionData, Client, ClientOptions, Collection } from 'discord.js';
+import { readdirSync } from 'fs';
+import { BotOptions } from '../types/';
+import { Command, Event, SubCommand } from './';
 
 export function propertyInEnum<V extends {[k: string]: any}>(enumObject: V, property: string): keyof V | undefined {
 	return enumObject[property] ?? undefined;

@@ -1,5 +1,5 @@
-import {Command, Event, Bot, Logger} from '../utils/class/';
-import {rss} from '../utils';
+import { rss } from '../utils';
+import { Bot, Command, Event, Logger } from '../utils/class/';
 
 export default new Event('ready', async (client: Bot) => {
 	const guilds = [

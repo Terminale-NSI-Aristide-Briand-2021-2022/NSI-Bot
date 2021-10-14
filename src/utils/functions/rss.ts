@@ -1,6 +1,6 @@
-import {Bot, Logger} from '../class';
+import { MessageEmbed, TextChannel } from 'discord.js';
 import fetch from 'node-fetch';
-import {MessageEmbed, TextChannel, WebhookClient} from 'discord.js';
+import { Bot, Logger } from '../class';
 
 let lastCheck = new Date().getTime() - 300000;
 

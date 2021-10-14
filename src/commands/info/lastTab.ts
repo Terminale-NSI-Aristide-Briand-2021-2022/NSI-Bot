@@ -1,6 +1,6 @@
-import {CommandInteraction, MessageEmbed} from 'discord.js';
-import {Command, Bot} from '../../utils';
+import { CommandInteraction, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
+import { Bot, Command } from '../../utils';
 
 export default new Command(
 	{
