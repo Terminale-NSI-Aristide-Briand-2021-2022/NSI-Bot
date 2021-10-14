@@ -13,7 +13,7 @@ export default new Command(
 	},
 	async (client: Bot, interaction: CommandInteraction) => {
 		//await interaction.reply({content: "loading..."});
-		// get a connection token
+		// get a connection token and a cookie !
 		let result = await fetch(process.env.MOODLE_LINK + '/login/index.php');
 		let y = result.headers.get('set-cookie')?.replace('MoodleSession=', '').split(';')[0] || '';
 		console.log(result.headers);
@@ -33,7 +33,7 @@ export default new Command(
 				headers: {
 					Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 					Cookie: 'MoodleSession=' + y,
-					Connection: 'keep-alive',
+					Connection: 'keep-alive'
 				},
 			})
 		).headers.get('set-cookie');

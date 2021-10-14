@@ -1,5 +1,6 @@
 import { ApplicationCommandOptionData, Client, ClientOptions, Collection } from 'discord.js';
 import { readdirSync } from 'fs';
+
 import { BotOptions } from '../types/';
 import { Command, Event, SubCommand } from './';
 
@@ -78,7 +79,9 @@ export class Bot extends Client {
 		await this.launchHandler();
 
 		if (this.inDev) {
-			this.login(process.env.TOKEN);
+			this.login(process.env.TOKEN_BETA);
+		} else {
+			this.login(process.env.TOKEN)
 		}
 	}
 }

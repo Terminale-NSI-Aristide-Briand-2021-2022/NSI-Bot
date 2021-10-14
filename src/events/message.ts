@@ -1,4 +1,6 @@
-import { Message, MessageActionRow, MessageButton, MessageComponentInteraction, MessageEmbed } from 'discord.js';
+import {
+    Message, MessageActionRow, MessageButton, MessageComponentInteraction, MessageEmbed
+} from 'discord.js';
 import piston from 'node-piston';
 
 import { Bot, Event } from '../utils';
@@ -6,6 +8,7 @@ import { Bot, Event } from '../utils';
 const pistonClient = piston();
 
 export default new Event('messageCreate', async (client: Bot, message: Message) => {
+	if (client.inDev) return // if we're in dev mod we don't want the two bots to collapse
 	if (!message.guild || message.author.bot) return;
 	if (!message.content?.includes('```')) return;
 	let code = message.content.split('```')[1];

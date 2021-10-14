@@ -18,39 +18,38 @@ export default new Event('ready', async (client: Bot) => {
 		],
 	});
 
-	if (client.inDev) {
-		for (const guild of guilds) {
-			await guild?.commands.set(client.commands.filter(c => c instanceof Command).map(c => (c as Command).data)).catch(_ => _);
-			for (const cmd of client.commands.filter(c => c instanceof Command && (c.permission?.user?.dev ?? false)).map(m => (m as Command).data.name)) {
-				guild?.commands.cache
-					.find(c => c.name === cmd)
-					?.permissions.add({
-						permissions: client.developpers.map(d => {
-							return {
-								id: d,
-								type: 'USER',
-								permission: true,
-							};
-						}),
-					})
-					.catch(_ => _);
-			}
-			for (const cmd of client.commands.filter(c => c instanceof Command && (c.permission?.user?.mod ?? false)).map(m => (m as Command).data.name)) {
-				guild?.commands.cache
-					.find(c => c.name === cmd)
-					?.permissions.add({
-						permissions: client.developpers.map(d => {
-							return {
-								id: d,
-								type: 'USER',
-								permission: true,
-							};
-						}),
-					})
-					.catch(_ => _);
-			}
+	for (const guild of guilds) {
+		await guild?.commands.set(client.commands.filter(c => c instanceof Command).map(c => (c as Command).data)).catch(_ => _);
+		for (const cmd of client.commands.filter(c => c instanceof Command && (c.permission?.user?.dev ?? false)).map(m => (m as Command).data.name)) {
+			guild?.commands.cache
+				.find(c => c.name === cmd)
+				?.permissions.add({
+					permissions: client.developpers.map(d => {
+						return {
+							id: d,
+							type: 'USER',
+							permission: true,
+						};
+					}),
+				})
+				.catch(_ => _);
+		}
+		for (const cmd of client.commands.filter(c => c instanceof Command && (c.permission?.user?.mod ?? false)).map(m => (m as Command).data.name)) {
+			guild?.commands.cache
+				.find(c => c.name === cmd)
+				?.permissions.add({
+					permissions: client.developpers.map(d => {
+						return {
+							id: d,
+							type: 'USER',
+							permission: true,
+						};
+					}),
+				})
+				.catch(_ => _);
 		}
 	}
+	
 	Logger.info('Cache', 'SETUP');
 	for (const guild of client.guilds.cache.map(m => m)) {
 		await guild?.members.fetch();
