@@ -1,4 +1,5 @@
 import { Interaction } from 'discord.js';
+
 import { Bot, Event, Logger } from '../utils';
 
 export default new Event('interactionCreate', async (client: Bot, interaction: Interaction) => {

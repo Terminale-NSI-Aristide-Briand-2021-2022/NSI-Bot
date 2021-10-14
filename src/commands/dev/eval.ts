@@ -1,6 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { transpile } from 'typescript';
 import { inspect } from 'util';
+
 import { Bot, Command } from '../../utils';
 
 export default new Command(

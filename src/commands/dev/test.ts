@@ -2,6 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { JSDOM } from 'jsdom';
 import fetch from 'node-fetch';
 import { URLSearchParams } from 'url';
+
 import { Bot, Command } from '../../utils';
 
 export default new Command(

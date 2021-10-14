@@ -1,5 +1,6 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import fetch from 'node-fetch';
+
 import { Bot, Logger } from '../class';
 
 let lastCheck = new Date().getTime() - 300000;
