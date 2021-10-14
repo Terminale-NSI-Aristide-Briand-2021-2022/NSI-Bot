@@ -3,7 +3,7 @@ import { readdirSync } from 'fs';
 import { BotOptions } from '../types/';
 import { Command, Event, SubCommand } from './';
 
-export function propertyInEnum<V extends {[k: string]: any}>(enumObject: V, property: string): keyof V | undefined {
+export function propertyInEnum<V extends { [k: string]: any }>(enumObject: V, property: string): keyof V | undefined {
 	return enumObject[property] ?? undefined;
 }
 

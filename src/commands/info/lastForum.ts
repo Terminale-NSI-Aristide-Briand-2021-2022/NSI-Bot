@@ -64,6 +64,6 @@ export default new Command(
 			},
 			color: authorName === 'Yann Bertrand' || authorName === 'Jérôme Cantaloube' ? 'RED' : 'DARK_PURPLE',
 		});
-		interaction.reply({embeds: [embed]});
+		interaction.reply({ embeds: [embed] });
 	}
 );

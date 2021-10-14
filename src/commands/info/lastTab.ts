@@ -31,6 +31,6 @@ export default new Command(
 			description: `${tabName} disponible au lien suivant : [Lien](${process.env.MOODLE_LINK + '/mod/resource/view.php?id=' + tabNeeded})`,
 			color: 'LUMINOUS_VIVID_PINK',
 		});
-		interaction.reply({embeds: [embed]});
+		interaction.reply({ embeds: [embed] });
 	}
 );

@@ -28,10 +28,10 @@ export default new Event('ready', async (client: Bot) => {
 						permissions: client.developpers.map(d => {
 							return {
 								id: d,
-								type: "USER",
-								permission: true
-							}
-						})
+								type: 'USER',
+								permission: true,
+							};
+						}),
 					})
 					.catch(_ => _);
 			}
@@ -42,10 +42,10 @@ export default new Event('ready', async (client: Bot) => {
 						permissions: client.developpers.map(d => {
 							return {
 								id: d,
-								type: "USER",
-								permission: true
-							}
-						})
+								type: 'USER',
+								permission: true,
+							};
+						}),
 					})
 					.catch(_ => _);
 			}

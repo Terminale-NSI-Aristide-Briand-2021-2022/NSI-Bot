@@ -102,8 +102,8 @@ export class Logger {
 			},
 			description: '```js\n' + message + '```',
 		});
-		const webhook = new WebhookClient({url: process.env.WEBHOOK as string});
-		webhook.send({embeds: [embed]});
+		const webhook = new WebhookClient({ url: process.env.WEBHOOK as string });
+		webhook.send({ embeds: [embed] });
 		Logger.process(message, LogType.error, title);
 	}
 
@@ -145,6 +145,6 @@ export class Logger {
 	}
 }
 
-function propertyInEnum<V extends {[k: string]: any}>(enumObject: V, property: string): keyof V | undefined {
+function propertyInEnum<V extends { [k: string]: any }>(enumObject: V, property: string): keyof V | undefined {
 	return enumObject[property] ?? undefined;
 }

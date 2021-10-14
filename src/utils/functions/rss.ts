@@ -93,7 +93,7 @@ export const rss = async (client: Bot) => {
 			},
 			color: authorName === 'Yann  Bertrand' || authorName === 'Jérôme Cantaloube' ? 'RED' : 'DARK_PURPLE',
 		});
-		notificationChannel.send({content: `<@&887935241405235260>`, embeds: [embed]});
+		notificationChannel.send({ content: `<@&887935241405235260>`, embeds: [embed] });
 	}
 	if (awsers[0] < awserLast) {
 		replies(last, notificationChannel, awserLast, 0);
@@ -144,7 +144,7 @@ export const rss = async (client: Bot) => {
 			description: `${tabName} disponible au lien suivant : [Lien](${process.env.MOODLE_LINK + '/mod/resource/view.php?id=' + tabNeeded})`,
 			color: 'LUMINOUS_VIVID_PINK',
 		});
-		notificationChannel.send({embeds: [embed], content: 'Nouveau tableau'});
+		notificationChannel.send({ embeds: [embed], content: 'Nouveau tableau' });
 	} else lastTab = tabName;
 
 	lastCheck = new Date().getTime();
@@ -199,7 +199,7 @@ async function replies(grosString: string, c: TextChannel, nbGS: number, index: 
 		);
 	}
 	embedTab.reverse();
-	c.send({content: `<@&887935415129112607>`, embeds: embedTab});
+	c.send({ content: `<@&887935415129112607>`, embeds: embedTab });
 
 	awsers[index] = nbGS;
 }

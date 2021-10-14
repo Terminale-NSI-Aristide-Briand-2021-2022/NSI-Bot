@@ -40,7 +40,7 @@ export default new Command(
 					},
 					description: '```js\n' + ss.substr(0, 1800) + '```',
 				});
-				await interaction.reply({embeds: [embed], ephemeral: true});
+				await interaction.reply({ embeds: [embed], ephemeral: true });
 				for (let i = 1; i < str.length; i = i + 1800) {
 					let ss = str.substr(i, i + 1800);
 					const embed = new MessageEmbed({
@@ -55,7 +55,7 @@ export default new Command(
 						},
 						description: '```js\n' + ss.substr(0, 1800) + '```',
 					});
-					interaction.followUp({embeds: [embed], ephemeral: true});
+					interaction.followUp({ embeds: [embed], ephemeral: true });
 				}
 			} else {
 				str = str.substr(0, 1800);
@@ -72,7 +72,7 @@ export default new Command(
 					},
 					description: '```js\n' + str + '```',
 				});
-				await interaction.reply({embeds: [embed], ephemeral: true});
+				await interaction.reply({ embeds: [embed], ephemeral: true });
 			}
 		} catch (err: any) {
 			const embed = new MessageEmbed({
@@ -87,7 +87,7 @@ export default new Command(
 				},
 				description: '```js\n' + err + '```',
 			});
-			await interaction.reply({embeds: [embed], ephemeral: true});
+			await interaction.reply({ embeds: [embed], ephemeral: true });
 		}
 	},
 	{

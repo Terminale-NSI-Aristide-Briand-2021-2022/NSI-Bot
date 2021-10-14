@@ -13,9 +13,9 @@ export default new Command(
 	async (client: Bot, interaction: CommandInteraction) => {
 		//await interaction.reply({content: "loading..."});
 		// get a connection token
-		let result = await fetch(process.env.MOODLE_LINK + '/login/index.php')
-		let y = result.headers.get('set-cookie')?.replace('MoodleSession=', '').split(';')[0] || "";
-		console.log(result.headers)
+		let result = await fetch(process.env.MOODLE_LINK + '/login/index.php');
+		let y = result.headers.get('set-cookie')?.replace('MoodleSession=', '').split(';')[0] || '';
+		console.log(result.headers);
 		const dom = new JSDOM(await result.text());
 		let t = dom.window.document.getElementById('guestlogin')?.innerHTML.split('<input type="hidden" name="logintoken" value="')[1].split('">')[0] ?? '';
 		console.log(t);
@@ -89,7 +89,7 @@ export default new Command(
 			description: `${tabName} disponible au lien suivant : [Lien](${process.env.MOODLE_LINK + '/mod/resource/view.php?id=' + tabNeeded})`,
 			color: 'LUMINOUS_VIVID_PINK',
 		});
-		interaction.reply({embeds: [embed]}); /*
+		interaction.reply({ embeds: [embed] }); /*
 		/*fGbssRuNMOYTl5vYSDscLGX6WNA17sYH
 		let res = await fetch("http://pronote.lyc-briand-44.ac-nantes.fr/pronote/eleve.html?identifiant=rgmeR3FYDpQCzxcA", {method: "GET", headers: {
 			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,;q=0.8,application/signed-exchange;v=b3;q=0.9",
