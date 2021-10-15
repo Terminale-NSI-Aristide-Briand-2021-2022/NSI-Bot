@@ -1,7 +1,7 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import fetch from 'node-fetch';
 
-import { Bot, Logger } from '../class';
+import { Bot, Logger } from '../';
 
 let lastCheck = new Date().getTime() - 300000;
 
@@ -22,6 +22,7 @@ export const rss = async (client: Bot) => {
 	Logger.info('RSS LOOP');
 
 	const notificationChannel = client.channels.cache.get(client.inDev ? `887745625637142570` : `887719893825388557`) as TextChannel;
+	//const notificationChannel = client.channels.cache.get(`887745625637142570`) as TextChannel;
 
 	let tab = (await (await fetch(process.env.MOODLE_LINK + '/mod/forum/view.php?id=93')).text()).split('<tr class="discussion r');
 
@@ -29,6 +30,7 @@ export const rss = async (client: Bot) => {
 
 	const sujet = last.split(`<td class="topic starter">`)[1].split('</td>')[0];
 	const url = sujet.split(`<a href="`)[1].split(`">`)[0];
+	console.log(url)
 	const page = await (await fetch(url)).text();
 	const dateStr = page.split(`<div class="topic firstpost starter">`)[1].split(', ').slice(1, 3).join(', ');
 
@@ -53,11 +55,10 @@ export const rss = async (client: Bot) => {
 			Number(dateTab[3].replace(',', '')),
 			Number(mounth),
 			Number(dateTab[1]),
-			Number(hourTab[0]) - 2,
+			Number(hourTab[0]),
 			Number(hourTab[1].replace('</div></div></div><div', ''))
 		).getTime() + 9999;
 
-	console.log(dateRss);
 	let awserLast = Number(last.split(`<td class="replies">`)[1].split('</a>')[0].split('>')[1]);
 
 	if (awsers[0] === -1) awsers[0] = awserLast;
@@ -79,7 +80,9 @@ export const rss = async (client: Bot) => {
 				.replace(/<p>/g, '')
 				.replace(/<\/p>/g, '\n')
 				.replace(/<br \/>/g, '\n')
-				.replace(/&gt;/, '>') + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
+				.replace(/&gt;/g, '>')
+				.replace(/<b>/g, "**")
+				.replace(/<\/b>/g, "**") + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
 
 		const embed = new MessageEmbed({
 			author: {
