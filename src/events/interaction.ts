@@ -37,11 +37,7 @@ export default new Event('interactionCreate', async (client: Bot, interaction: I
 					content: `You can't use that command, you need permissions that are missing : \`${command.permission.user?.perms?.toString()}\`.`,
 					ephemeral: true,
 				});
-
-			const forgerons = client.inDev ? '698880675066937414' : '701178173139714069';
-			if (command.permission.user?.mod && !member.roles.cache.has(forgerons) && !client.developpers.includes(member.id))
-				return await interaction.reply({ content: `You can't use that command, you need to be a forgeron.`, ephemeral: true });
-
+				
 			if (command.permission.user?.dev && !client.developpers.includes(member.id))
 				return await interaction.reply({ content: `You can't use that command, you need to be a bot developer.`, ephemeral: true });
 		}
