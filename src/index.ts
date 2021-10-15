@@ -12,7 +12,7 @@ export const client = new Bot(
 		inDev: true,
 	},
 	{
-		intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS'],
+		intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS'],
 	}
 );
 
