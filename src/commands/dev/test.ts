@@ -32,14 +32,14 @@ export default new Command(
 				method: 'POST',
 				headers: {
 					Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-					Cookie: 'MoodleSession=' + y,
+					
 					Connection: 'keep-alive'
 				},
 			})
 		).headers.get('set-cookie');
 
 		console.log(result1);
-		let test = result1?.replace('MoodleSession=', '').split(';')[0];
+		let test = result1?.split(';')[0] ?? "";
 		console.log(test);
 
 		// ?? Test the connection I guess 🤷‍♂️
@@ -48,7 +48,7 @@ export default new Command(
 				method: 'GET',
 				headers: {
 					Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-					Cookie: 'MoodleSession=' + test,
+					Cookie: test,
 					Connection: 'keep-alive',
 				},
 			})
@@ -61,7 +61,7 @@ export default new Command(
 					method: 'GET',
 					headers: {
 						Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-						Cookie: 'MoodleSession=' + test,
+						Cookie: test,
 						Connection: 'keep-alive',
 					},
 				})
@@ -73,7 +73,7 @@ export default new Command(
 					method: 'GET',
 					headers: {
 						Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-						Cookie: 'MoodleSession=' + test,
+						Cookie: test,
 						Connection: 'keep-alive',
 					},
 				})
@@ -90,7 +90,7 @@ export default new Command(
 			description: `${tabName} disponible au lien suivant : [Lien](${process.env.MOODLE_LINK + '/mod/resource/view.php?id=' + tabNeeded})`,
 			color: 'LUMINOUS_VIVID_PINK',
 		});
-		interaction.reply({ embeds: [embed] }); /*
+		interaction.reply({ embeds: [embed] });
 		/*fGbssRuNMOYTl5vYSDscLGX6WNA17sYH
 		let res = await fetch("http://pronote.lyc-briand-44.ac-nantes.fr/pronote/eleve.html?identifiant=rgmeR3FYDpQCzxcA", {method: "GET", headers: {
 			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,;q=0.8,application/signed-exchange;v=b3;q=0.9",
