@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionData, Client, ClientOptions, Collection } from 'discord.js';
 import { readdirSync } from 'fs';
 
-import { BotOptions } from '../types/';
+import { BotOptions } from '../';
 import { Command, Event, SubCommand } from './';
 
 export function propertyInEnum<V extends { [k: string]: any }>(enumObject: V, property: string): keyof V | undefined {
@@ -33,7 +33,7 @@ export class Bot extends Client {
 
 	commands = new Collection<string, Command | SubCommand>();
 
-	async launchHandler() {
+	private async launchHandler() {
 		const pathEvent: string = 'events/';
 		readdirSync(`./out/${pathEvent}`).forEach(event => {
 			if (!event.endsWith('.js')) return;
@@ -75,7 +75,7 @@ export class Bot extends Client {
 		});
 	}
 
-	async launch() {
+	private async launch() {
 		await this.launchHandler();
 
 		if (this.inDev) {
