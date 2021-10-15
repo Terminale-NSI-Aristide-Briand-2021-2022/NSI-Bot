@@ -12,7 +12,7 @@ export default new Command(
 		defaultPermission: false,
 	},
 	async (client: Bot, interaction: CommandInteraction) => {
-		//await interaction.reply({content: "loading..."});
+		// await interaction.reply({content: "loading..."});
 		// get a connection token and a cookie !
 		let result = await fetch(process.env.MOODLE_LINK + '/login/index.php');
 		let y = result.headers.get('set-cookie')?.replace('MoodleSession=', '').split(';')[0] || '';

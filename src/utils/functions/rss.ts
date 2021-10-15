@@ -93,13 +93,13 @@ export const rss = async (client: Bot) => {
 				text: `Par ${authorName}`,
 				iconURL: authorPP,
 			},
-			color: authorName === 'Yann  Bertrand' || authorName === 'Jérôme Cantaloube' ? 'RED' : 'DARK_PURPLE',
+			color: authorName === 'Yann Bertrand' || authorName === 'Jérôme Cantaloube' ? 'RED' : 'DARK_PURPLE',
 		});
 		notificationChannel.send({ content: `<@&887935241405235260>`, embeds: [embed] });
 	}
 	
 	if (awsers[0] === -1) awsers[0] = awserLast;
-	
+
 	if (awsers[0] < awserLast) {
 		replies(last, notificationChannel, awserLast, 0);
 	}
