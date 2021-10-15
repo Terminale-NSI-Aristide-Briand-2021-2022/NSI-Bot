@@ -61,8 +61,6 @@ export const rss = async (client: Bot) => {
 
 	let awserLast = Number(last.split(`<td class="replies">`)[1].split('</a>')[0].split('>')[1]);
 
-	if (awsers[0] === -1) awsers[0] = awserLast;
-
 	if (dateRss > lastCheck) {
 		awsers = [awserLast, awsers[0], awsers[1]];
 		// Here we see that the last forum topic is new so we handle it
@@ -99,6 +97,9 @@ export const rss = async (client: Bot) => {
 		});
 		notificationChannel.send({ content: `<@&887935241405235260>`, embeds: [embed] });
 	}
+	
+	if (awsers[0] === -1) awsers[0] = awserLast;
+	
 	if (awsers[0] < awserLast) {
 		replies(last, notificationChannel, awserLast, 0);
 	}
