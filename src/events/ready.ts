@@ -1,3 +1,4 @@
+import { ActivitiesOptions } from 'discord.js';
 import { rss } from '../utils';
 import { Bot, Command, Event, Logger } from '../utils/class/';
 
@@ -54,24 +55,25 @@ export default new Event('ready', async (client: Bot) => {
 	for (const guild of client.guilds.cache.map(m => m)) {
 		await guild?.members.fetch();
 	}
+	const status: ActivitiesOptions = client.inDev ? {
+		name: "se fait taper dessus par Simon",
+		type: "PLAYING"
+	} : {
+		name: "les devoirs à faire",
+		type: 'WATCHING',
+	}
 	Logger.info('Done', 'SETUP');
 	client.user?.setPresence({
 		status: 'online',
 		activities: [
-			{
-				name: 'les devoirs à faire',
-				type: 'WATCHING',
-			},
+			status
 		],
 	});
 	setInterval(() => {
 		client.user?.setPresence({
 			status: 'online',
 			activities: [
-				{
-					name: 'les devoirs à faire',
-					type: 'WATCHING',
-				},
+				status
 			],
 		});
 	}, 60000);

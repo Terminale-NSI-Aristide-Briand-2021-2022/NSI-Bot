@@ -21,7 +21,7 @@ interface awsers {
 export const rss = async (client: Bot) => {
 	Logger.info('RSS LOOP');
 
-	const notificationChannel = client.channels.cache.get(/*`887745625637142570`*/ `887719893825388557`) as TextChannel;
+	const notificationChannel = client.channels.cache.get(client.inDev ? `887745625637142570` : `887719893825388557`) as TextChannel;
 
 	let tab = (await (await fetch(process.env.MOODLE_LINK + '/mod/forum/view.php?id=93')).text()).split('<tr class="discussion r');
 
