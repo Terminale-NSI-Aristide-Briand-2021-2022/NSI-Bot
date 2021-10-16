@@ -24,7 +24,10 @@ export default new Command(
 				.split(`<div class="attachedimages">`)[0]
 				.replace(/<p>/g, '')
 				.replace(/<\/p>/g, '\n')
-				.replace(/<br \/>/g, '\n') + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
+				.replace(/<br \/>/g, '\n')
+				.replace(/&gt;/g, '>')
+				.replace(/<b>/g, "**")
+				.replace(/<\/b>/g, "**") + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
 
 		const embed = new MessageEmbed({
 			author: {

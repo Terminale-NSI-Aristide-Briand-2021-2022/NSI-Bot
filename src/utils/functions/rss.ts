@@ -172,11 +172,11 @@ async function replies(grosString: string, c: TextChannel, nbGS: number, index: 
 				.split(`<div class="posting fullpost">`)[1]
 				.split(`<div class="attachedimages">`)[0]
 				.replace(/<p>/g, '')
-				.replace(/<span>/g, '')
-				.replace(/<\/span>/g, '')
 				.replace(/<\/p>/g, '\n')
 				.replace(/<br \/>/g, '\n')
-				.replace(/&gt;/, '>'),
+				.replace(/&gt;/g, '>')
+				.replace(/<b>/g, "**")
+				.replace(/<\/b>/g, "**"),
 			author: {
 				pp: awsersList[i].split(`<div class="left picture">`)[1].split('</div>')[0].split(`<img src="`)[1].split(`"`)[0],
 				name: awsersList[i].split(`<div class="author"`)[1].split('</div>')[0].split('<a href="')[1].split('</a>')[0].split(`">`)[1],
