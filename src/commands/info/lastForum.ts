@@ -25,6 +25,7 @@ export default new Command(
 				.replace(/<p>/g, '')
 				.replace(/<\/p>/g, '\n')
 				.replace(/<br \/>/g, '\n')
+				.replace(/<p align="left">/, '')
 				.replace(/&gt;/g, '>')
 				.replace(/<b>/g, "**")
 				.replace(/<\/b>/g, "**") + `\n[Lien](${url})\n<:Nothing:888076372981993512>`;
