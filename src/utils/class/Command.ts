@@ -5,35 +5,35 @@ import { Bot } from './';
 type DefaultCommandRunFunction = (client: Bot, interaction: CommandInteraction) => Promise<void> | void;
 
 interface Permission {
-	bot?: PermissionResolvable;
-	user?: {
-		perms?: PermissionResolvable;
-		dev?: boolean;
-		mod?: boolean;
-	};
+  bot?: PermissionResolvable;
+  user?: {
+    perms?: PermissionResolvable;
+    dev?: boolean;
+    mod?: boolean;
+  };
 }
 
 export class Command {
-	data: ApplicationCommandData;
+  data: ApplicationCommandData;
 
-	run: DefaultCommandRunFunction;
+  run: DefaultCommandRunFunction;
 
-	permission?: Permission;
+  permission?: Permission;
 
-	constructor(data: ApplicationCommandData, run: DefaultCommandRunFunction = () => {}, permissions?: Permission) {
-		this.data = data;
-		this.run = run;
-		this.permission = permissions;
-	}
+  constructor(data: ApplicationCommandData, run: DefaultCommandRunFunction = () => {}, permissions?: Permission) {
+    this.data = data;
+    this.run = run;
+    this.permission = permissions;
+  }
 }
 
 export class SubCommand {
-	run: DefaultCommandRunFunction;
+  run: DefaultCommandRunFunction;
 
-	permission?: Permission;
+  permission?: Permission;
 
-	constructor(run: DefaultCommandRunFunction = () => {}, permissions?: Permission) {
-		this.run = run;
-		this.permission = permissions;
-	}
+  constructor(run: DefaultCommandRunFunction = () => {}, permissions?: Permission) {
+    this.run = run;
+    this.permission = permissions;
+  }
 }
