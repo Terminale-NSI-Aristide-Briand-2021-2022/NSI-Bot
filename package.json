@@ -25,6 +25,7 @@
     "node-fetch": "2.6.1",
     "node-forge": "^0.10.0",
     "pako": "^1.0.11",
+    "piston-client": "file:node-piston",
     "polka": "^0.5.2",
     "string-strip-html": "^8.2.9",
     "uuid": "^8.3.0",
