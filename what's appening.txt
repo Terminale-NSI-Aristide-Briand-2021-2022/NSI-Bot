@@ -1,0 +1,37 @@
+first: connect 
+- https://ent.nsi.abriand.info/login/index.php
+get : `
+    <div class="mt-2">
+        <p>Des cours peuvent être accessibles aux visiteurs anonymes</p>
+        <form action="https://ent.nsi.abriand.info/login/index.php" method="post" id="guestlogin">
+            <input type="hidden" name="logintoken" value="<THIS>">
+            <input type="hidden" name="username" value="guest" />
+            <input type="hidden" name="password" value="guest" />
+            <button class="btn btn-secondary btn-block" type="submit">Connexion anonyme</button>
+        </form>
+    </div>
+    `
+here : HbLoQHUQ2hkJkh7c5oq1RjLlNgO2ApNK
+
+second: register
+- https://ent.nsi.abriand.info/login/index.php POST
+
+it seem I have a default MoodleSession :thinking:
+
+logintoken = HbLoQHUQ2hkJkh7c5oq1RjLlNgO2ApNK
+username = guest
+password = guest
+
+third: test 
+- https://ent.nsi.abriand.info/login/index.php?testsession=1
+
+just go on that page it seem with the MoodleSession
+
+
+------------------------------------------------------------------------
+
+Cookie : 6otnklua9s1epm2sb905n0d840
+logintoken : sqCqBC3KxULLfuHjG8NPCGDkfrOC3uz8
+
+2nd Cookie : fgv3kbhs3glki46i1d439qsk56
+
